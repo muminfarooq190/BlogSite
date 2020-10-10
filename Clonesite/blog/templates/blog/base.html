@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BASE</title>
+
+    
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!--MEDIUM STYLE-->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!--cUSTOM css-->
+    <link rel="stylesheet" href="{% static 'css/blog.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Russo+One&display=swap" rel="stylesheet"> 
+
+    <!--fONTS-->
+    
+</head>
+<body class="loader">
+    <!--NAVBAr-->
+    <nav class="  navbar navbar-light bg-light techfont custom-navbar">
+        <div class="container">
+            <ul class="navbar  navbar-light">
+                <li><a class=" bigbrand loader" href="{% url 'post_list'%}">My Blog</a></li>
+                <li><a class="loader" href="{% url 'about'%}">About</a></li>
+                <li><a class="loader" href="https://www.github.com">Github</a></li>
+                <li><a class="loader" href="https://www.linkedin.com">linkedIn</a></li> 
+
+            </ul>
+           <ul class="nav  custom-navbar">
+               {% if user.is_authenticated %}
+               <li><a  href="{% url 'post_new'%}">New Blog</a></li>
+               <li><a  href="{% url 'post_draft_list'%}">Drafts</a></li>
+               <li><a  href="{% url 'logout'%}">Logout</a></li>
+               <li><a>Welcome {{ user.username }}</a></li>
+               {% else %}
+                <li><a class="nav navbar-nav navbar-light" href="{% url 'login'%}"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                  </svg></a></li>
+               
+               {% endif %}
+           </ul>
+        </div>
+
+    </nav>
+
+    <!--Content block-->
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog">
+                    {% block content%}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
